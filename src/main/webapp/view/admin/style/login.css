@@ -1,0 +1,39 @@
+﻿/*登录*/
+.y_login_bg,.y_login_bg:before{ background:url(../img/login_bg.png) repeat;  width: 100%; height: 100%}
+.login-container.y_login-container{ max-width: 380px !important  }
+.login-container.y_login-container .loginbox,.login-container.y_login-container .logobox{ width: 370px !important }
+.loginbox-title{ padding: 30px 0 20px !important; height: auto !important; font-family:"Microsoft YaHei" !important}
+
+.y_login_logo{ background:url(../img/login_logo.png) no-repeat; display: block; width: 305px; height: 31px; margin:0 auto 10px; }
+
+.login-container.y_login-container .loginbox .loginbox-textbox .form-control{ border-radius: 0 !important; height: 36px; line-height: 22px; padding-left:10px; background: none !important; border-color: #e5e5e5 !important;}
+.login-container.y_login-container .loginbox .loginbox-textbox .form-control:focus{ border-color: #cfa972 !important }
+
+.ie7 .login-container.y_login-container .loginbox .loginbox-textbox .form-control{ padding-top:0; padding-bottom:0; height: 36px; line-height: 36px;}
+
+.login-container.y_login-container .loginbox .loginbox-textbox{ position: relative; padding-top: 10px; padding-bottom: 10px;}
+.ie7 .login-container.y_login-container .loginbox .loginbox-textbox{ padding-right:63px; height:36px;}
+
+.login-container.y_login-container .loginbox .loginbox-forgot{ padding-right: 40px; font-size: 13px; height: 40px; line-height: 40px;}
+
+.checkbox_lg_default,.checkbox_lg_checked{ width: 18px; height: 18px; margin:12px 7px 0 0;}
+.checkbox_lg_default{ background:url(../img/login_default.png) no-repeat; cursor: pointer;}
+.checkbox_lg_default:hover{ background:url(../img/login_hover.png) no-repeat;}
+.checkbox_lg_checked{ background:url(../img/login_checked.png) no-repeat;}
+
+.login-container.y_login-container .loginbox{ height: auto !important; padding-bottom: 20px !important; }
+.login-container .loginbox .loginbox-submit input{ background-color: #00a0e9 !important; border-color:#00a0e9 !important; padding-top: 8px !important; padding-bottom: 8px !important; font-size: 14px; }
+.login-container .loginbox .loginbox-submit input:hover{ background-color: #1b90c5 !important;border-color:#1b90c5 !important}
+.login-container .logobox.y_tips{ text-align: center; padding-top: 17px;  padding-left: 80px; }
+.ie7 .login-container .logobox.y_tips{ padding-top:15px !important; height:26px !important; width:285px !important;}
+.y_tips i{ background:url(../img/login_tip.png) no-repeat; width: 18px; height: 18px; display: inline-block; margin-right: 6px}
+.ie7 .y_tips i{ margin-top:1px;}
+.y_tips span{ color: #ea472c }
+.loginbox_vertCode input{ padding-left: 8px !important; width: 140px; }
+.y_vertCode{ width:100px; height: 36px; line-height: 36px;}
+.loginbox_vertCode a{ width: 40px; line-height: 36px; height: 36px; text-align: center; font-size: 15px}
+
+.ie7 .y_vertCode,.ie7 .loginbox_vertCode a{ height: 38px; line-height: 38px;}
+.login_copyright{ text-align: center; font-size: 12px; color: #999; text-shadow: 1px 1px 0px #fff; padding-top: 20px;}
+
+.ie7 .login-container.y_login-container .loginbox,.ie7 .login-container .logobox,.ie8 .login-container.y_login-container .loginbox,.ie8 .login-container .logobox{ border:1px solid #dfdfdf; }
