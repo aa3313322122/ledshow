@@ -1,11 +1,7 @@
 package com.puban.framework.core.dao.impl;
 
-import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.puban.framework.core.dao.IBaseDao;
+import com.puban.framework.core.page.QueryResult;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,8 +10,10 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.puban.framework.core.dao.IBaseDao;
-import com.puban.framework.core.page.QueryResult;
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class BaseDaoImpl<T> implements IBaseDao<T>
 {
@@ -155,7 +153,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T>
 		qr.setResultlist(resultlist);
 		query = session.createQuery(" select count(o) from " + entiryName + " o " + (wherejpql == null ? "" : " where " + wherejpql) + " " + buildOrderBy(orderby));
 		this.setQueryParams(query, queryParams);
-		qr.setTotalrecord((Long) query.uniqueResult());
+		qr.setTotalrecord(resultlist.size());
 		return qr;
 	}
 

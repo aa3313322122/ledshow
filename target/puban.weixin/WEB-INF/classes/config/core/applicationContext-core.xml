@@ -27,15 +27,23 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="${jdbc.driverClass}" />
-		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
-		<property name="user" value="${jdbc.user}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
-
-	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
-		<property name="jndiName" value="java:comp/env/jdbc/dhb"></property> </bean> -->
-
+      <property name="driverClass"><value>${jdbc.driverClass}</value></property> 
+      <property name="jdbcUrl"><value>${jdbc.jdbcUrl}</value></property>             
+      <property name="user"><value>${jdbc.user}</value></property> 
+      <property name="password"><value>${jdbc.password}</value></property> 
+      <property name="minPoolSize"><value>1</value></property> 
+      <property name="maxPoolSize"><value>100</value></property> 
+      <property name="maxIdleTime"><value>1800</value></property> 
+      <property name="acquireIncrement"><value>2</value></property> 
+      <property name="maxStatements"><value>0</value></property> 
+      <property name="initialPoolSize"><value>2</value></property> 
+      <property name="idleConnectionTestPeriod"><value>1800</value></property> 
+      <property name="acquireRetryAttempts"><value>30</value></property> 
+      <property name="breakAfterAcquireFailure"><value>true</value></property> 
+      <property name="testConnectionOnCheckout"><value>false</value></property> 
+	</bean> 
+	
+	<!-- sessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -56,28 +64,23 @@
 			</props>
 		</property>
 	</bean>
-
+	
+	<!-- transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	
 	<tx:advice id="advice" transaction-manager="transactionManager">
 		<tx:attributes>
+			<tx:method name="add*"    propagation="REQUIRED" />
 			<tx:method name="save*"    propagation="REQUIRED" />
 			<tx:method name="update*"  propagation="REQUIRED" />
 			<tx:method name="delete*"  propagation="REQUIRED" />
-			<tx:method name="remove*"  propagation="REQUIRED" />
-			<tx:method name="subscribe*"    propagation="REQUIRED" />
-			<tx:method name="unSubscribe*"  propagation="REQUIRED" />
-			<tx:method name="find*"    propagation="SUPPORTS" read-only="true" />
-			<tx:method name="query*"   propagation="SUPPORTS" read-only="true" />
-			<tx:method name="get*"     propagation="SUPPORTS"  read-only="true" />
-			<tx:method name="load*"    propagation="SUPPORTS" read-only="true" />
 			<tx:method name="*"        propagation="SUPPORTS"  read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-
+	
 	<aop:config>
 		<aop:pointcut id="pointcut" expression="execution(* *..service.impl*..*(..))" />
 		<aop:advisor advice-ref="advice" pointcut-ref="pointcut" />

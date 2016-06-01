@@ -21,8 +21,14 @@
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
-	<!-- 数据库属性文件加载 -->
-	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 数据库属性文件XML方式加载(此方式仅支持xml方式)-->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:jdbc.properties</value>
+			</array>
+		</property>
+	</bean>
 	
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -42,7 +48,8 @@
       <property name="breakAfterAcquireFailure"><value>true</value></property> 
       <property name="testConnectionOnCheckout"><value>false</value></property> 
 	</bean> 
-
+	
+	<!-- sessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -53,39 +60,32 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
+					org.hibernate.dialect.SQLServerDialect
 				</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.jdbc.batch_size">50</prop>
 				<prop key="show_sql">50</prop>
 			</props>
 		</property>
 	</bean>
-
+	
+	<!-- transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	
 	<tx:advice id="advice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="add*"    propagation="REQUIRED" />
 			<tx:method name="save*"    propagation="REQUIRED" />
 			<tx:method name="update*"  propagation="REQUIRED" />
 			<tx:method name="delete*"  propagation="REQUIRED" />
-			<tx:method name="remove*"  propagation="REQUIRED" />
-			<tx:method name="subscribe*"    propagation="REQUIRED" />
-			<tx:method name="unSubscribe*"  propagation="REQUIRED" />
-			<tx:method name="find*"    propagation="SUPPORTS" read-only="true" />
-			<tx:method name="query*"   propagation="SUPPORTS" read-only="true" />
-			<tx:method name="get*"     propagation="SUPPORTS"  read-only="true" />
-			<tx:method name="load*"    propagation="SUPPORTS" read-only="true" />
 			<tx:method name="*"        propagation="SUPPORTS"  read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-
+	
 	<aop:config>
 		<aop:pointcut id="pointcut" expression="execution(* *..service.impl*..*(..))" />
 		<aop:advisor advice-ref="advice" pointcut-ref="pointcut" />

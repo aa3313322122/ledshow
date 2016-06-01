@@ -3,17 +3,19 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.puban</groupId>
-	<artifactId>puban.weixin</artifactId>
+	<artifactId>puban.ledshow</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>puban.weixin Maven Webapp</name>
+	<name>puban.ledshow Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jtds.version>1.2.4</jtds.version>
 		<junit.version>4.9</junit.version>
 		<fastjson.version>1.2.8</fastjson.version>
 		<log4j.version>1.2.14</log4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
 		<servlet.version>3.1.0</servlet.version>
 		<mysql.driver.version> 5.1.13</mysql.driver.version>
@@ -25,9 +27,25 @@
 		<httpclient.version>4.5.1</httpclient.version>
 		<fileupload.version>1.3.1</fileupload.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
+		<activiti-version>5.18.0</activiti-version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+	<dependency>
+	      <groupId>org.activiti</groupId>
+	      <artifactId>activiti-engine</artifactId>
+	      <version>${activiti-version}</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.activiti</groupId>
+	      <artifactId>activiti-spring</artifactId>
+	      <version>${activiti-version}</version>
+	    </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -143,6 +161,20 @@
 		</dependency>
 		<!-- log4j end -->
 
+		<!-- slf4j start -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- slf4j end -->
+		
+		
 		<!-- fileupload start -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -162,7 +194,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>puban.weixin</finalName>
+		<finalName>puban.ledshow</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- JDK编译插件，使web工程默认使用JDK1.8编译 -->
